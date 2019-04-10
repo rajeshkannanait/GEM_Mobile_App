@@ -1,0 +1,63 @@
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="application/javascript">
+	var ip="";
+		function getIP(json) {
+			console.log('ip',json.ip );
+			ip = json.ip;
+		}
+
+	</script>
+
+	<script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+    <script type="text/javascript">
+        function initGeolocation()
+        {
+            if( navigator.geolocation )
+            {
+                // Call getCurrentPosition with success and failure callbacks
+                navigator.geolocation.getCurrentPosition( success, fail );
+            }
+            else
+            {
+               // alert("Sorry, your browser does not support geolocation services.");
+            }
+        }
+
+        function success(position)
+        {
+           document.getElementById('long').value = position.coords.longitude;
+           document.getElementById('lat').value = position.coords.latitude;
+
+           console.log("lon:" + position.coords.longitude + ", lat:" + position.coords.latitude );
+			
+		   var dt = new Date();
+		  var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+		var date = dt.toLocaleDateString();
+		
+		  document.write('ip: '+ ip +'<br>');
+		  document.write('long: '+position.coords.longitude +'<br>');
+		  document.write('lat: '+position.coords.latitude+'<br>');
+         document.write('time: ' +time+'<br>');
+		 document.write('date: ' +date+'<br>');
+		 
+		var timeZone = dt.toTimeString().toString();
+		 
+		  document.write(timeZone);
+        }
+
+        function fail()
+        {
+            // Could not obtain location
+        }
+
+    </script>
+</head>
+
+<body onLoad="initGeolocation();">
+    <FORM NAME="rd" METHOD="POST" ACTION="index.html">
+	 <INPUT NAME="long" ID="ip" VALUE="">
+        <INPUT NAME="long" ID="long" VALUE="">
+        <INPUT NAME="lat" ID="lat" VALUE="">
+</body>
